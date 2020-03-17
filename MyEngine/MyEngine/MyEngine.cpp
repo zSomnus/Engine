@@ -1,11 +1,84 @@
-// MyEngine.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include "olcConsoleGameEngine.h"
+using namespace std;
 
-#include <iostream>
+struct vec3d
+{
+	float x, y, z;
+};
+
+struct triangle
+{
+	vec3d p[3];
+};
+
+struct mesh
+{
+	vector<triangle> tris;
+};
+
+class MyEngine : public olcConsoleGameEngine
+{
+public:
+	MyEngine()
+	{
+		m_sAppName = L"3D Demo";
+	}
+
+private:
+	mesh meshCube;
+
+public:
+	bool OnUserCreate() override
+	{
+
+		meshCube.tris = {
+			// SOUTH
+			{0.0f, 0.0f, 0.0f,		0.0f, 1.0f, 0.0f,		1.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 0.0f,		1.0f, 1.0f, 0.0f,		1.0f, 0.0f, 0.0f},
+
+			// EAST
+			{1.0f, 0.0f, 0.0f,		1.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f},
+			{1.0f, 0.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 0.0f, 1.0f},
+
+			// NORTH
+			{1.0f, 0.0f, 1.0f,		1.0f, 1.0f, 1.0f,		0.0f, 1.0f, 1.0f},
+			{1.0f, 0.0f, 1.0f,		0.0f, 1.0f, 1.0f,		0.0f, 0.0f, 1.0f},
+
+			// WEST
+			{0.0f, 0.0f, 1.0f,		0.0f, 1.0f, 1.0f,		0.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 1.0f,		0.0f, 1.0f, 0.0f,		0.0f, 0.0f, 0.0f},
+
+			// TOP
+			{0.0f, 1.0f, 0.0f,		0.0f, 1.0f, 1.0f,		1.0f, 1.0f, 1.0f},
+			{0.0f, 1.0f, 0.0f,		1.0f, 1.0f, 1.0f,		1.0f, 1.0f, 0.0f},
+
+			// BOTTOM
+			{0.0f, 0.0f, 0.0f,		0.0f, 0.0f, 1.0f,		1.0f, 0.0f, 1.0f},
+			{0.0f, 0.0f, 0.0f,		1.0f, 0.0f, 1.0f,		1.0f, 0.0f, 0.0f},
+		};
+		return true;
+	}
+
+	bool OnUserUpdate(float fElapsedTime) override
+	{
+		Fill(0, 0, ScreenWidth(), ScreenHeight(), PIXEL_SOLID, FG_BLACK);
+
+		// Draw Triangles
+		for (auto tri : meshCube.tris)
+		{
+
+		}
+
+		return true;
+	}
+};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	MyEngine demo;
+	if (demo.ConstructConsole(256, 240, 4, 4))
+		demo.Start();
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
