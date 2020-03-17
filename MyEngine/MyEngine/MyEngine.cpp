@@ -114,9 +114,9 @@ public:
 
 		// Rotation X
 		matRotX.m[0][0] = 1;
-		matRotX.m[0][1] = cosf(fTheta * 0.5f);
-		matRotX.m[1][0] = sinf(fTheta * 0.5f);
-		matRotX.m[1][1] = -sinf(fTheta * 0.5f);
+		matRotX.m[1][1] = cosf(fTheta * 0.5f);
+		matRotX.m[1][2] = sinf(fTheta * 0.5f);
+		matRotX.m[2][1] = -sinf(fTheta * 0.5f);
 		matRotX.m[2][2] = cosf(fTheta * 0.5f);
 		matRotX.m[3][3] = 1;
 
