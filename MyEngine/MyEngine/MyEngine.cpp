@@ -162,16 +162,15 @@ public:
 
 
 
-			// if (normal.z < 0)
+			//// if (normal.z < 0)
 			if(normal.x * (triTranslated.p[0].x - vCamera.x) + 
-				normal.x * (triTranslated.p[0].y - vCamera.y) +
-				normal.x * (triTranslated.p[0].z - vCamera.z) < 0)
+				normal.y * (triTranslated.p[0].y - vCamera.y) +
+				normal.z * (triTranslated.p[0].z - vCamera.z) < 0)
 			{
 				// Project triangles from 3D to 2D ( from the world space to the screen space)
 				MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
 				MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], matProj);
 				MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], matProj);
-			}
 
 			// Scale into view
 			triProjected.p[0].x += 1.0f;
@@ -198,6 +197,7 @@ public:
 				triProjected.p[2].x, triProjected.p[2].y,
 				PIXEL_SOLID, FG_WHITE
 				);
+			}
 		}
 
 		return true;
