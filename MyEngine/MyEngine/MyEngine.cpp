@@ -33,6 +33,8 @@ private:
 	mesh meshCube;
 	mat4x4 matProj;
 
+	vec3d vCamera;	// Position of camera in 3D space
+
 	float fTheta;
 
 	void MultiplyMatrixVector(vec3d& i, vec3d& o, mat4x4& m)
@@ -158,12 +160,17 @@ public:
 			normal.z / l;
 
 
-			if (normal.z < 0)
+
+
+			// if (normal.z < 0)
+			if(normal.x * (triTranslated.p[0].x - vCamera.x) + 
+				normal.x * (triTranslated.p[0].y - vCamera.y) +
+				normal.x * (triTranslated.p[0].z - vCamera.z) < 0)
 			{
-			// Project triangles from 3D to 2D ( from the world space to the screen space)
-			MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
-			MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], matProj);
-			MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], matProj);
+				// Project triangles from 3D to 2D ( from the world space to the screen space)
+				MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], matProj);
+				MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], matProj);
+				MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], matProj);
 			}
 
 			// Scale into view
