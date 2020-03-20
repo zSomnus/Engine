@@ -206,9 +206,12 @@ public:
 
 int main()
 {
+	RECT rect;
+	SystemParametersInfo(SPI_GETWORKAREA, 0, (PVOID)&rect, 0);
 	MyEngine demo;
-	if (demo.ConstructConsole(256, 240, 4, 4))
+	if (demo.ConstructConsole(GetSystemMetrics(SM_CXSCREEN) / 3, GetSystemMetrics(SM_CYSCREEN) / 3, 2, 2))
 		demo.Start();
+
 	return 0;
 }
 
